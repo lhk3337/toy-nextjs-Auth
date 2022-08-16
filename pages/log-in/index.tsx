@@ -13,16 +13,15 @@ const Login = () => {
   const onSubmit: SubmitHandler<IUser> = (data) => {
     console.log(data);
   };
-  const onInvalid = () => {
-    alert("이메일을 입력하세요");
-  };
+
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit(onSubmit, onInvalid)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <span>Email:</span>
-          <input type="email" {...register("email", { required: true })} />
+          <input type="email" {...register("email", { required: "Please write down your email." })} />
+          {errors.email?.message}
         </div>
         <input type="submit" value="Login" />
       </form>

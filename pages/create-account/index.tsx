@@ -12,23 +12,32 @@ const Create = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
+
   const onSubmit: SubmitHandler<IUser> = (data) => {
-    console.log(data);
+    fetch("/api/user/enter", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
   };
+
   const onInValid = () => {
     console.log("Invalid");
   };
+
   return (
     <>
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit(onSubmit, onInValid)}>
         <div>
           <span>Name:</span>
-          <input type="text" {...register("name", { required: true })} />
+          <input type="text" {...register("name", { required: "Please write down your name." })} />
+          {errors.name?.message}
         </div>
         <div>
           <span>Email:</span>
-          <input type="email" {...register("email")} />
+          <input type="email" {...register("email", { required: "Please write down your email." })} />
+          {errors.email?.message}
         </div>
         <input type="submit" value="Create Account" />
       </form>
