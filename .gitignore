@@ -1,2 +1,5 @@
 node_modules
 .next
+prisma/migrations
+prisma/dev.db
+prisma/dev.db-journal
