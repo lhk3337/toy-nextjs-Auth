@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { useRouter } from "next/router";
+import useMutation from "../../lib/useMutation";
 interface IUser {
   name: string;
   email: string;
@@ -13,12 +14,13 @@ const Create = () => {
     formState: { errors },
   } = useForm<IUser>();
 
+  const router = useRouter();
+  const [enter] = useMutation("/api/create");
+
   const onSubmit: SubmitHandler<IUser> = (data) => {
-    fetch("/api/user/enter", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
+    enter(data);
+    alert("Account created! Please log in!");
+    router.push("/log-in");
   };
 
   const onInValid = () => {

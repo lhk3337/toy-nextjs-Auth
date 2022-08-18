@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { useRouter } from "next/router";
+import useMutation from "../../lib/useMutation";
 interface IUser {
   email: string;
+}
+interface MutationResult {
+  ok: boolean;
 }
 const Login = () => {
   const {
@@ -10,10 +14,16 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>();
+  const router = useRouter();
+  const [enter, { data: loginData }] = useMutation<MutationResult>("/api/login");
   const onSubmit: SubmitHandler<IUser> = (data) => {
-    console.log(data);
+    enter(data);
   };
-
+  useEffect(() => {
+    if (loginData?.ok) {
+      router.push("/");
+    }
+  }, [loginData, router]);
   return (
     <>
       <h1>Login</h1>
