@@ -1,42 +1,35 @@
-# Hello World example
+# lib
 
-## How to use
+### db.ts
 
-### Using `create-next-app`
+`prisma client`
 
-Execute [`create-next-app`](https://github.com/segmentio/create-next-app) with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) or [npx](https://github.com/zkat/npx#readme) to bootstrap the example:
+### useMutation.tsx : page - create-account
 
-```bash
-npx create-next-app --example hello-world hello-world-app
-# or
-yarn create next-app --example hello-world hello-world-app
-```
+`fetch 부분을 Component로 변경`
 
-### Download manually
+### withHandler.ts : page - api
 
-Download the example:
+`api에서 중복된 handler를 함수로 추가하여 중복 제거`
 
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/hello-world
-cd hello-world
-```
+### withSession.ts
 
-Install it and run:
+`session cookies 설정`
 
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
+# page
 
-Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download))
+- ## api : 백엔드 서버
 
-```bash
-now
-```
+  - ### create.tsx : 회원가입 시 db에 name과 email을 보내 db를 생성한다. localhost:3000/api/users/create를 fetch 할 경우 작동됨
+  - ### login.tsx : 로그인 시 db의 email의 데이터를 가져온다. localhost:3000/api/users/login을 fetch 할 경우 작동됨
+  - ### user.tsx : 로그인 후 db에서 name과 email 데이터를 가져온다. localhost:3000/api/users/user를 fetch 할 경우 작동됨
 
-## The idea behind the example
+- ## log-in : login 페이지
 
-This example shows the most basic idea behind Next. We have 2 pages: `pages/index.js` and `pages/about.js`. The former responds to `/` requests and the latter to `/about`. Using `next/link` you can add hyperlinks between them with universal routing capabilities. The `day` directory shows that you can have subdirectories.
+- ## create-account : 회원가입 페이지
+
+- ## index.tsx : 메인 홈 페이지
+
+# prisma
+
+### prisma 스키마 설정
